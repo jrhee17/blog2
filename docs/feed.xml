@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/blog2/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog2/" rel="alternate" type="text/html" /><updated>2019-01-28T01:09:08+09:00</updated><id>/blog2/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Welcome to Jekyll!</title><link href="/blog2/jekyll/update/2019/01/27/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-01-27T22:56:24+09:00</published><updated>2019-01-27T22:56:24+09:00</updated><id>/blog2/jekyll/update/2019/01/27/welcome-to-jekyll</id><content type="html" xml:base="/blog2/jekyll/update/2019/01/27/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Mysql Select Flow</title><link href="/blog2/second/2018/09/04/mysql-select.html" rel="alternate" type="text/html" title="Mysql Select Flow" /><published>2018-09-04T04:12:11+09:00</published><updated>2018-09-04T04:12:11+09:00</updated><id>/blog2/second/2018/09/04/mysql-select</id><content type="html" xml:base="/blog2/second/2018/09/04/mysql-select.html">&lt;p&gt;Mysql&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;mysql_execute_command
+    &lt;ul&gt;
+      &lt;li&gt;Get table to select from&lt;/li&gt;
+      &lt;li&gt;Reset connection info&lt;/li&gt;
+      &lt;li&gt;Check if read-only query&lt;/li&gt;
+      &lt;li&gt;case GTID_STATEMENT_EXECUTE&lt;/li&gt;
+      &lt;li&gt;open temporary table&lt;/li&gt;
+      &lt;li&gt;case SQLCOM_SELECT&lt;/li&gt;
+      &lt;li&gt;check privileges&lt;/li&gt;
+      &lt;li&gt;execute_sqlcom_select
+        &lt;ul&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;open_tables_for_query&lt;/code&gt;
+            &lt;ul&gt;
+              &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;open_tables&lt;/code&gt;
+                &lt;ul&gt;
+                  &lt;li&gt;for each table do &lt;code class=&quot;highlighter-rouge&quot;&gt;open_and_process_table&lt;/code&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;open_table&lt;/code&gt;
+                        &lt;ul&gt;
+                          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;open_table_get_mdl_lock&lt;/code&gt;
+                            &lt;ul&gt;
+                              &lt;li&gt;thd-&amp;gt;mdl_context.acquire_lock&lt;/li&gt;
+                              &lt;li&gt;ticket
+                                &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  {
+  ...
+  m_type = MDL_INTENTION_EXCLUSIVE
+  m_duration = MDL_STATEMENT
+  ...
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                                &lt;/div&gt;
+                              &lt;/li&gt;
+                              &lt;li&gt;mdl_request
+                                &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  type = MDL_SHARED_READ
+  duration = MDL_TRANSACTION
+  key = (m_length = 17, m_db_name_length = 7, m_ptr = char [387] @ 0x00007f99fbb1f164)
+  ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                                &lt;/div&gt;
+                              &lt;/li&gt;
+                              &lt;li&gt;try_acquire_lock_impl(mdl_request, &amp;amp;ticket)
+                                &lt;ul&gt;
+                                  &lt;li&gt;check if context already holds shared lock on subject&lt;/li&gt;
+                                  &lt;li&gt;create MDL_ticket&lt;/li&gt;
+                                  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MDL_lock::get_unobtrusive_lock_increment&lt;/code&gt;
+                                    &lt;ul&gt;
+                                      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;request-&amp;gt;key.mdl_namespace()&lt;/code&gt;: TABLE&lt;/li&gt;
+                                      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;m_object_lock_strategy.m_unobtrusive_lock_increment[request-&amp;gt;type]&lt;/code&gt;&lt;/li&gt;
+                                    &lt;/ul&gt;
+                                  &lt;/li&gt;
+                                  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mysql_mdl_create&lt;/code&gt;&lt;/li&gt;
+                                  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lock= mdl_locks.find_or_insert(m_pins, key, &amp;amp;pinned)&lt;/code&gt;
+                                    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  (MDL_lock) $7 = {
+    key = (m_length = 17, m_db_name_length = 7, m_ptr = char [387] @ 0x00007fe5f42dc604)
+    m_rwlock = {
+      m_prlock = {
+        lock = (__sig = 1297437786, __opaque = char [56] @ 0x00007fe5f42dc790)
+        no_active_readers = (__sig = 1129270852, __opaque = char [40] @ 0x00007fe5f42dc7d0)
+        active_readers = 0
+        writers_waiting_readers = 0
+        active_writer = '\0'
+        writer_thread = 0x0000000000000000
+      }
+      m_psi = 0x000000010e4c6100
+    }
+    m_granted = {
+      m_list = {
+        I_P_List_fast_push_back&amp;lt;MDL_ticket&amp;gt; = {
+          m_last = 0x0000000103f67200
+        }
+        m_first = 0x0000000000000000
+      }
+      m_bitmap = 0
+    }
+    m_waiting = {
+      m_list = {
+        I_P_List_fast_push_back&amp;lt;MDL_ticket&amp;gt; = {
+          m_last = 0x0000000103f67218
+        }
+        m_first = 0x0000000000000000
+      }
+      m_bitmap = 0
+    }
+    m_hog_lock_count = 0
+    m_piglet_lock_count = 0
+    m_current_waiting_incompatible_idx = 0
+    m_obtrusive_locks_granted_waiting_count = 0
+    m_fast_path_state = 1048576
+    m_strategy = 0x0000000101dafbd0
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                                    &lt;/div&gt;
+                                  &lt;/li&gt;
+                                  &lt;li&gt;check if other locks exist&lt;/li&gt;
+                                  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lock_object_used&lt;/code&gt;
+                                    &lt;ul&gt;
+                                      &lt;li&gt;If pinned (singleton?), decrement &lt;code class=&quot;highlighter-rouge&quot;&gt;m_unused_lock_objects&lt;/code&gt;&lt;/li&gt;
+                                    &lt;/ul&gt;
+                                  &lt;/li&gt;
+                                  &lt;li&gt;push to &lt;code class=&quot;highlighter-rouge&quot;&gt;m_tickets&lt;/code&gt;&lt;/li&gt;
+                                  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mysql_mdl_set_status(ticket-&amp;gt;m_psi, MDL_ticket::GRANTED)&lt;/code&gt;: Set psi status to granted if psi is not null&lt;/li&gt;
+                                &lt;/ul&gt;
+                              &lt;/li&gt;
+                              &lt;li&gt;If ticket is not null, lock was acquired -&amp;gt; return&lt;/li&gt;
+                            &lt;/ul&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;compute hash
+                            &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  p table_list-&amp;gt;open_strategy
+  (TABLE_LIST::(anonymous enum)) $21 = OPEN_NORMAL
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;                            &lt;/div&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;Get table cache, lock mutex for table cache, and try to get cached table (if found, unlock mutex)&lt;/li&gt;
+                          &lt;li&gt;Add table to &lt;code class=&quot;highlighter-rouge&quot;&gt;table_list&lt;/code&gt;&lt;/li&gt;
+                          &lt;li&gt;Initialize table instance&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;‘read_lock_type_for_table’: Change to TL_READ thread lock (&lt;code class=&quot;highlighter-rouge&quot;&gt;tbl-&amp;gt;reginfo.lock_type&lt;/code&gt;)&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;handle_query&lt;/code&gt;
+            &lt;ul&gt;
+              &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;select-&amp;gt;prepare&lt;/code&gt;: prepare query block for optimization&lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lock_tables&lt;/code&gt;
+                &lt;ul&gt;
+                  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mysql_lock_tables&lt;/code&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lock_tables_check&lt;/code&gt;: check if tables ares locked&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;get_lock_data&lt;/code&gt;: create lock&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lock_external&lt;/code&gt;: external ha lock (&lt;code class=&quot;highlighter-rouge&quot;&gt;F_RDLCK&lt;/code&gt;)&lt;/li&gt;
+                      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;thr_lock_errno_to_mysql&lt;/code&gt;: lock on half of lock data array&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;thd-&amp;gt;lex-&amp;gt;lock_tables_state= Query_tables_list::LTS_LOCKED;&lt;/code&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;query_cache.store_query()&lt;/code&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;select-&amp;gt;join-&amp;gt;exec()&lt;/code&gt;: execute query
+                &lt;ul&gt;
+                  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;do_select()&lt;/code&gt;
+                    &lt;ul&gt;
+                      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;first_select&lt;/code&gt;: perform actual query&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;trans_commit_stmt&lt;/code&gt;: perform transaction commit&lt;/li&gt;
+      &lt;li&gt;release metadata locks&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Mysql</summary></entry><entry><title type="html">Jelly-filled donuts are my favorite2</title><link href="/blog2/first/2016/05/30/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Jelly-filled donuts are my favorite2" /><published>2016-05-30T04:12:11+09:00</published><updated>2016-05-30T04:12:11+09:00</updated><id>/blog2/first/2016/05/30/welcome-to-jekyll</id><content type="html" xml:base="/blog2/first/2016/05/30/welcome-to-jekyll.html">&lt;p&gt;Jelly-filled donuts are my favorite type of donuts because I like getting them without knowing what’s inside of them. I like to be surprised the moment I bite into them :)&lt;/p&gt;</content><author><name></name></author><summary type="html">Jelly-filled donuts are my favorite type of donuts because I like getting them without knowing what’s inside of them. I like to be surprised the moment I bite into them :)</summary></entry></feed>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Mysql Select Flow | Your awesome title</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Mysql Select Flow" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Mysql" />
+<meta property="og:description" content="Mysql" />
+<link rel="canonical" href="/blog2/second/2018/09/03/mysql-select.html" />
+<meta property="og:url" content="/blog2/second/2018/09/03/mysql-select.html" />
+<meta property="og:site_name" content="Your awesome title" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-09-03T19:12:11+00:00" />
+<script type="application/ld+json">
+{"description":"Mysql","@type":"BlogPosting","url":"/blog2/second/2018/09/03/mysql-select.html","headline":"Mysql Select Flow","dateModified":"2018-09-03T19:12:11+00:00","datePublished":"2018-09-03T19:12:11+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"/blog2/second/2018/09/03/mysql-select.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog2/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/blog2/feed.xml" title="Your awesome title" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog2/">Your awesome title</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog2/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Mysql Select Flow</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-09-03T19:12:11+00:00" itemprop="datePublished">Sep 3, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Mysql</p>
+
+<ul>
+  <li>mysql_execute_command
+    <ul>
+      <li>Get table to select from</li>
+      <li>Reset connection info</li>
+      <li>Check if read-only query</li>
+      <li>case GTID_STATEMENT_EXECUTE</li>
+      <li>open temporary table</li>
+      <li>case SQLCOM_SELECT</li>
+      <li>check privileges</li>
+      <li>execute_sqlcom_select
+        <ul>
+          <li><code class="highlighter-rouge">open_tables_for_query</code>
+            <ul>
+              <li><code class="highlighter-rouge">open_tables</code>
+                <ul>
+                  <li>for each table do <code class="highlighter-rouge">open_and_process_table</code>
+                    <ul>
+                      <li><code class="highlighter-rouge">open_table</code>
+                        <ul>
+                          <li><code class="highlighter-rouge">open_table_get_mdl_lock</code>
+                            <ul>
+                              <li>thd-&gt;mdl_context.acquire_lock</li>
+                              <li>ticket
+                                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  {
+  ...
+  m_type = MDL_INTENTION_EXCLUSIVE
+  m_duration = MDL_STATEMENT
+  ...
+  }
+</code></pre></div>                                </div>
+                              </li>
+                              <li>mdl_request
+                                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  type = MDL_SHARED_READ
+  duration = MDL_TRANSACTION
+  key = (m_length = 17, m_db_name_length = 7, m_ptr = char [387] @ 0x00007f99fbb1f164)
+  ...
+</code></pre></div>                                </div>
+                              </li>
+                              <li>try_acquire_lock_impl(mdl_request, &amp;ticket)
+                                <ul>
+                                  <li>check if context already holds shared lock on subject</li>
+                                  <li>create MDL_ticket</li>
+                                  <li><code class="highlighter-rouge">MDL_lock::get_unobtrusive_lock_increment</code>
+                                    <ul>
+                                      <li><code class="highlighter-rouge">request-&gt;key.mdl_namespace()</code>: TABLE</li>
+                                      <li><code class="highlighter-rouge">m_object_lock_strategy.m_unobtrusive_lock_increment[request-&gt;type]</code></li>
+                                    </ul>
+                                  </li>
+                                  <li><code class="highlighter-rouge">mysql_mdl_create</code></li>
+                                  <li><code class="highlighter-rouge">lock= mdl_locks.find_or_insert(m_pins, key, &amp;pinned)</code>
+                                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  (MDL_lock) $7 = {
+    key = (m_length = 17, m_db_name_length = 7, m_ptr = char [387] @ 0x00007fe5f42dc604)
+    m_rwlock = {
+      m_prlock = {
+        lock = (__sig = 1297437786, __opaque = char [56] @ 0x00007fe5f42dc790)
+        no_active_readers = (__sig = 1129270852, __opaque = char [40] @ 0x00007fe5f42dc7d0)
+        active_readers = 0
+        writers_waiting_readers = 0
+        active_writer = '\0'
+        writer_thread = 0x0000000000000000
+      }
+      m_psi = 0x000000010e4c6100
+    }
+    m_granted = {
+      m_list = {
+        I_P_List_fast_push_back&lt;MDL_ticket&gt; = {
+          m_last = 0x0000000103f67200
+        }
+        m_first = 0x0000000000000000
+      }
+      m_bitmap = 0
+    }
+    m_waiting = {
+      m_list = {
+        I_P_List_fast_push_back&lt;MDL_ticket&gt; = {
+          m_last = 0x0000000103f67218
+        }
+        m_first = 0x0000000000000000
+      }
+      m_bitmap = 0
+    }
+    m_hog_lock_count = 0
+    m_piglet_lock_count = 0
+    m_current_waiting_incompatible_idx = 0
+    m_obtrusive_locks_granted_waiting_count = 0
+    m_fast_path_state = 1048576
+    m_strategy = 0x0000000101dafbd0
+  }
+</code></pre></div>                                    </div>
+                                  </li>
+                                  <li>check if other locks exist</li>
+                                  <li><code class="highlighter-rouge">lock_object_used</code>
+                                    <ul>
+                                      <li>If pinned (singleton?), decrement <code class="highlighter-rouge">m_unused_lock_objects</code></li>
+                                    </ul>
+                                  </li>
+                                  <li>push to <code class="highlighter-rouge">m_tickets</code></li>
+                                  <li><code class="highlighter-rouge">mysql_mdl_set_status(ticket-&gt;m_psi, MDL_ticket::GRANTED)</code>: Set psi status to granted if psi is not null</li>
+                                </ul>
+                              </li>
+                              <li>If ticket is not null, lock was acquired -&gt; return</li>
+                            </ul>
+                          </li>
+                          <li>compute hash
+                            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  p table_list-&gt;open_strategy
+  (TABLE_LIST::(anonymous enum)) $21 = OPEN_NORMAL
+</code></pre></div>                            </div>
+                          </li>
+                          <li>Get table cache, lock mutex for table cache, and try to get cached table (if found, unlock mutex)</li>
+                          <li>Add table to <code class="highlighter-rouge">table_list</code></li>
+                          <li>Initialize table instance</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>‘read_lock_type_for_table’: Change to TL_READ thread lock (<code class="highlighter-rouge">tbl-&gt;reginfo.lock_type</code>)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><code class="highlighter-rouge">handle_query</code>
+            <ul>
+              <li><code class="highlighter-rouge">select-&gt;prepare</code>: prepare query block for optimization</li>
+              <li><code class="highlighter-rouge">lock_tables</code>
+                <ul>
+                  <li><code class="highlighter-rouge">mysql_lock_tables</code>
+                    <ul>
+                      <li><code class="highlighter-rouge">lock_tables_check</code>: check if tables ares locked</li>
+                      <li><code class="highlighter-rouge">get_lock_data</code>: create lock</li>
+                      <li><code class="highlighter-rouge">lock_external</code>: external ha lock (<code class="highlighter-rouge">F_RDLCK</code>)</li>
+                      <li><code class="highlighter-rouge">thr_lock_errno_to_mysql</code>: lock on half of lock data array</li>
+                    </ul>
+                  </li>
+                  <li><code class="highlighter-rouge">thd-&gt;lex-&gt;lock_tables_state= Query_tables_list::LTS_LOCKED;</code></li>
+                </ul>
+              </li>
+              <li><code class="highlighter-rouge">query_cache.store_query()</code></li>
+              <li><code class="highlighter-rouge">select-&gt;join-&gt;exec()</code>: execute query
+                <ul>
+                  <li><code class="highlighter-rouge">do_select()</code>
+                    <ul>
+                      <li><code class="highlighter-rouge">first_select</code>: perform actual query</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><code class="highlighter-rouge">trans_commit_stmt</code>: perform transaction commit</li>
+      <li>release metadata locks</li>
+    </ul>
+  </li>
+</ul>
+
+  </div><a class="u-url" href="/blog2/second/2018/09/03/mysql-select.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog2/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Your awesome title</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Your awesome title</li><li><a class="u-email" href="mailto:your-email@example.com">your-email@example.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/blog2/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/blog2/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
