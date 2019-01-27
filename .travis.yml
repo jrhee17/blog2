@@ -4,7 +4,7 @@ branches:
   only:
   - release
 script:
-  - JEKYLL_ENV=production bundle exec jekyll build --destination site
+  - JEKYLL_ENV=production bundle exec jekyll build --destination docs
 deploy:
   provider: pages
   local-dir: ./site
