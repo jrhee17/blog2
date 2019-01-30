@@ -1,21 +1,114 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-01-30T12:22:54+00:00</updated><id>/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Using rxjs as an Ephemeral Storage for Mobile Applications</title><link href="/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html" rel="alternate" type="text/html" title="Using rxjs as an Ephemeral Storage for Mobile Applications" /><published>2019-01-30T11:41:24+00:00</published><updated>2019-01-30T11:41:24+00:00</updated><id>/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage</id><content type="html" xml:base="/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html">&lt;h1 id=&quot;problem-statement&quot;&gt;Problem Statement&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/blog2/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog2/" rel="alternate" type="text/html" /><updated>2019-01-30T14:08:01+00:00</updated><id>/blog2/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Using rxjs as an Ephemeral Storage for Mobile Applications</title><link href="/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html" rel="alternate" type="text/html" title="Using rxjs as an Ephemeral Storage for Mobile Applications" /><published>2019-01-30T11:41:24+00:00</published><updated>2019-01-30T11:41:24+00:00</updated><id>/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage</id><content type="html" xml:base="/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html">&lt;h2 id=&quot;problem-statement&quot;&gt;Problem Statement&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/20190130/alarm_list.png&quot; alt=&quot;Alarm List&quot; /&gt;&lt;/p&gt;
+&lt;h1 id=&quot;purpose&quot;&gt;Purpose&lt;/h1&gt;
+&lt;p&gt;We are developing a Bitcoin Alarm app which simply allows users to&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Add bitcoin alarms for a certain price&lt;/li&gt;
+  &lt;li&gt;Receive push notifications when a price is met&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h1 id=&quot;what-it-boils-down-to&quot;&gt;What it boils down to&lt;/h1&gt;
+&lt;p&gt;This is a contrived version of the overall flow of the app&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog2/assets/20190130/asisflow_uml.png&quot; alt=&quot;uml&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A few notable points include&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Many REST api calls
+    &lt;ul&gt;
+      &lt;li&gt;This is a rapid prototyping app meaning requirements may change suddenly&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Websockets
+    &lt;ul&gt;
+      &lt;li&gt;This is for realtime ticker (coin price) updates and alarm triggers. Websockets are opened automatically on background -&amp;gt; foreground transition.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The following is a sample alarm list screen&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog2/assets/20190130/alarm_list.png&quot; alt=&quot;screenshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A sample add alarm screen&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog2/assets/20190130/add_alarm.png&quot; alt=&quot;screenshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Just in case anyone isn’t familiar with crypto-jargon&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;exchange&lt;/code&gt;: Entities (businesses) which trade cryptocurrency&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;coin&lt;/code&gt;: Type of cryptocurrency (BTC, ETH , etc.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;problem&quot;&gt;Problem&lt;/h1&gt;
+&lt;p&gt;We would like to display &lt;code class=&quot;highlighter-rouge&quot;&gt;In-app-purchase to add more alarms&lt;/code&gt;
+(It’s unfortunate, but with server costs going out every month, every developer has to make &lt;em&gt;some&lt;/em&gt; money)&lt;/p&gt;
+
+&lt;p&gt;The condition for which we would like to display this is&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;3 alarms are already added
+    &lt;ul&gt;
+      &lt;li&gt;Saved in server – can retrieve by REST [GET] &lt;code class=&quot;highlighter-rouge&quot;&gt;/alarms&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The user has not purchased the app
+    &lt;ul&gt;
+      &lt;li&gt;Saved in server. To decide if also need to save in client&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Note: Obviously we would also have to check whether the user has purchased this feature when the alarm is actually added.
+This check is just to notify users before the actual purchase.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;points-to-consider&quot;&gt;Points to consider&lt;/h1&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Will this data have to be retrieved every time?
+  &lt;li&gt;I would like to be able to maintain control over how alarms are added
     &lt;ul&gt;
-      &lt;li&gt;Can this data be stored in the mobile application&lt;/li&gt;
+      &lt;li&gt;What if I want to change the number of free alarms from &lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;5&lt;/code&gt; without app deployment?&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;Does this data have to be retrieved synchronously?
+  &lt;li&gt;I would like to minimize storage from the client side
     &lt;ul&gt;
-      &lt;li&gt;HTTP vs (Long Polling, Websockets, etc.)&lt;/li&gt;
+      &lt;li&gt;What if I want to get rid of this add-alarm-restriction? Will there be useless client data/code?&lt;/li&gt;
+      &lt;li&gt;Data inconsistency always happens between server and clients&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name></name></author><summary type="html">Problem Statement</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="/jekyll/update/2019/01/27/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-01-27T13:56:24+00:00</published><updated>2019-01-27T13:56:24+00:00</updated><id>/jekyll/update/2019/01/27/welcome-to-jekyll</id><content type="html" xml:base="/jekyll/update/2019/01/27/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+  &lt;li&gt;I would like to still maintain some efficiency
+    &lt;ul&gt;
+      &lt;li&gt;Should try to avoid calling the same api multiple times in different screens&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;I’m all for asynchronous everything, but flickering screens are not good for UX&lt;/li&gt;
+  &lt;li&gt;I would like a generalized pattern (redux???) that can handle calls like this
+    &lt;ul&gt;
+      &lt;li&gt;Unfortunately, while using &lt;code class=&quot;highlighter-rouge&quot;&gt;react-navigation&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;react-native&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;react-redux&lt;/code&gt; isn’t an option.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;possible-solutions&quot;&gt;Possible solutions&lt;/h1&gt;
+&lt;p&gt;With the above points in mind, I drafted the following 4 possible solutions&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Pass Parameters&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog2/assets/20190130/passparams_uml.png&quot; alt=&quot;uml&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Rest Call Every Time&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog2/assets/20190130/rest_uml.png&quot; alt=&quot;uml&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Websocket Call&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog2/assets/20190130/socket_uml.png&quot; alt=&quot;uml&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;RXJS cached variant&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog2/assets/20190130/cached_uml.png&quot; alt=&quot;uml&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog2/assets/20190130/new_standard.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Problem Statement</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="/blog2/jekyll/update/2019/01/27/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-01-27T13:56:24+00:00</published><updated>2019-01-27T13:56:24+00:00</updated><id>/blog2/jekyll/update/2019/01/27/welcome-to-jekyll</id><content type="html" xml:base="/blog2/jekyll/update/2019/01/27/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
 &lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
 
@@ -27,7 +120,7 @@
 &lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Mysql Select Flow</title><link href="/mysql/2018/09/03/mysql-select.html" rel="alternate" type="text/html" title="Mysql Select Flow" /><published>2018-09-03T19:12:11+00:00</published><updated>2018-09-03T19:12:11+00:00</updated><id>/mysql/2018/09/03/mysql-select</id><content type="html" xml:base="/mysql/2018/09/03/mysql-select.html">&lt;p&gt;Mysql&lt;/p&gt;
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Mysql Select Flow</title><link href="/blog2/mysql/2018/09/03/mysql-select.html" rel="alternate" type="text/html" title="Mysql Select Flow" /><published>2018-09-03T19:12:11+00:00</published><updated>2018-09-03T19:12:11+00:00</updated><id>/blog2/mysql/2018/09/03/mysql-select</id><content type="html" xml:base="/blog2/mysql/2018/09/03/mysql-select.html">&lt;p&gt;Mysql&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;mysql_execute_command
@@ -184,4 +277,4 @@
       &lt;li&gt;release metadata locks&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Mysql</summary></entry><entry><title type="html">Jelly-filled donuts are my favorite2</title><link href="/first/2016/05/29/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Jelly-filled donuts are my favorite2" /><published>2016-05-29T19:12:11+00:00</published><updated>2016-05-29T19:12:11+00:00</updated><id>/first/2016/05/29/welcome-to-jekyll</id><content type="html" xml:base="/first/2016/05/29/welcome-to-jekyll.html">&lt;p&gt;Jelly-filled donuts are my favorite type of donuts because I like getting them without knowing what’s inside of them. I like to be surprised the moment I bite into them :)&lt;/p&gt;</content><author><name></name></author><summary type="html">Jelly-filled donuts are my favorite type of donuts because I like getting them without knowing what’s inside of them. I like to be surprised the moment I bite into them :)</summary></entry></feed>
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Mysql</summary></entry><entry><title type="html">Jelly-filled donuts are my favorite2</title><link href="/blog2/first/2016/05/29/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Jelly-filled donuts are my favorite2" /><published>2016-05-29T19:12:11+00:00</published><updated>2016-05-29T19:12:11+00:00</updated><id>/blog2/first/2016/05/29/welcome-to-jekyll</id><content type="html" xml:base="/blog2/first/2016/05/29/welcome-to-jekyll.html">&lt;p&gt;Jelly-filled donuts are my favorite type of donuts because I like getting them without knowing what’s inside of them. I like to be surprised the moment I bite into them :)&lt;/p&gt;</content><author><name></name></author><summary type="html">Jelly-filled donuts are my favorite type of donuts because I like getting them without knowing what’s inside of them. I like to be surprised the moment I bite into them :)</summary></entry></feed>

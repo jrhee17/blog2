@@ -503,3 +503,6 @@ table {
     color: #008080; }
   .highlight .il {
     color: #099; }
+
+img[alt=screenshot] {
+  width: 50%; }
