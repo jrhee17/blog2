@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/blog2/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog2/" rel="alternate" type="text/html" /><updated>2019-01-30T14:08:01+00:00</updated><id>/blog2/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Using rxjs as an Ephemeral Storage for Mobile Applications</title><link href="/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html" rel="alternate" type="text/html" title="Using rxjs as an Ephemeral Storage for Mobile Applications" /><published>2019-01-30T11:41:24+00:00</published><updated>2019-01-30T11:41:24+00:00</updated><id>/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage</id><content type="html" xml:base="/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html">&lt;h2 id=&quot;problem-statement&quot;&gt;Problem Statement&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/blog2/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog2/" rel="alternate" type="text/html" /><updated>2019-01-30T15:38:02+00:00</updated><id>/blog2/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Using rxjs as an Ephemeral Storage for Mobile Applications</title><link href="/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html" rel="alternate" type="text/html" title="Using rxjs as an Ephemeral Storage for Mobile Applications" /><published>2019-01-30T11:41:24+00:00</published><updated>2019-01-30T11:41:24+00:00</updated><id>/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage</id><content type="html" xml:base="/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html">&lt;h2 id=&quot;problem-statement&quot;&gt;Problem Statement&lt;/h2&gt;
 
 &lt;h1 id=&quot;purpose&quot;&gt;Purpose&lt;/h1&gt;
 &lt;p&gt;We are developing a Bitcoin Alarm app which simply allows users to&lt;/p&gt;
@@ -65,7 +65,7 @@ This check is just to notify users before the actual purchase.&lt;/li&gt;
 &lt;h1 id=&quot;points-to-consider&quot;&gt;Points to consider&lt;/h1&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;I would like to be able to maintain control over how alarms are added
+  &lt;li&gt;I would like to be able to maintain control over how alarms are added from the server side
     &lt;ul&gt;
       &lt;li&gt;What if I want to change the number of free alarms from &lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;5&lt;/code&gt; without app deployment?&lt;/li&gt;
     &lt;/ul&gt;
@@ -87,6 +87,7 @@ This check is just to notify users before the actual purchase.&lt;/li&gt;
       &lt;li&gt;Unfortunately, while using &lt;code class=&quot;highlighter-rouge&quot;&gt;react-navigation&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;react-native&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;react-redux&lt;/code&gt; isn’t an option.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
+  &lt;li&gt;Minimize number of server apis if possible&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h1 id=&quot;possible-solutions&quot;&gt;Possible solutions&lt;/h1&gt;
@@ -96,7 +97,42 @@ This check is just to notify users before the actual purchase.&lt;/li&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog2/assets/20190130/passparams_uml.png&quot; alt=&quot;uml&quot; /&gt;&lt;/p&gt;
 
+&lt;p&gt;&lt;em&gt;Description&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Simply call &lt;code class=&quot;highlighter-rouge&quot;&gt;navigate(routeName, params)&lt;/code&gt; with alarm list as params&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Cons&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Always have to retrieve alarm list before navigating to add alarm screen&lt;/li&gt;
+  &lt;li&gt;Domain-wise Add-Alarm screen has little to do with already added alarms&lt;/li&gt;
+  &lt;li&gt;Hard to control add-alarm policy&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Pros&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Simple and straightforward to achieve&lt;/li&gt;
+  &lt;li&gt;Efficient - no extra server calls&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;p&gt;&lt;strong&gt;Rest Call Every Time&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Description&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Call &lt;code class=&quot;highlighter-rouge&quot;&gt;[REST] GET alarm/addable&lt;/code&gt; every time add alarm screen is loaded&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Cons&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;REST call every time page is loaded&lt;/li&gt;
+  &lt;li&gt;Need to create a non-restful api&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Pros&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Simple and straightforward to achieve&lt;/li&gt;
+  &lt;li&gt;Easy to control add-alarm policy&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog2/assets/20190130/rest_uml.png&quot; alt=&quot;uml&quot; /&gt;&lt;/p&gt;
 
@@ -104,9 +140,102 @@ This check is just to notify users before the actual purchase.&lt;/li&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog2/assets/20190130/socket_uml.png&quot; alt=&quot;uml&quot; /&gt;&lt;/p&gt;
 
+&lt;p&gt;&lt;em&gt;Description&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Send &lt;code class=&quot;highlighter-rouge&quot;&gt;{'type': 'check.alarm.addable'}&lt;/code&gt; every time add alarm screen is loaded&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Cons&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Minimal efficiency advantage over Rest call (assuming HTTP/2)&lt;/li&gt;
+  &lt;li&gt;Hard to develop good UI for asynchronous result&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Pros&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;no real advantage&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;p&gt;&lt;strong&gt;RXJS cached variant&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog2/assets/20190130/cached_uml.png&quot; alt=&quot;uml&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Description&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Cache api calls using redux pattern and use cached to determine whether alarm is addable&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Cons&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Challenging to implement&lt;/li&gt;
+  &lt;li&gt;Can’t control logic from server&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Pros&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Efficient - no extra server calls&lt;/li&gt;
+  &lt;li&gt;Generic - no extra api calls&lt;/li&gt;
+  &lt;li&gt;Client won’t be saving anything.
+Whenever app dies, all data will be reset.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;final-verdict&quot;&gt;Final Verdict&lt;/h1&gt;
+
+&lt;p&gt;I have decided to go with &lt;strong&gt;Redux pattern using RXJS&lt;/strong&gt; because I believe it will be worth the hassle.
+In my head, it will go something like this…&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;EphemeralStorage&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;EphemeralStorage&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alarmListSubject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Rx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;BehaviorSubject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;updateAlarmList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;alarmList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;RestClient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getJson&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`/alarms`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alarmListSubject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alarmList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;getAlarmListSubject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alarmListSubject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;EphemeralStorage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;AlarmList Screen&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AlarmList&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;React&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    
+    &lt;span class=&quot;nx&quot;&gt;componentDidMount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;EphemeralStorage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getAlarmListSubject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alarmList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alarmList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}));&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fetchAlarmList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;nx&quot;&gt;fetchAlarmList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;EphemeralStorage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;updateAlarmList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;AddAlarm Screen&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AddAlarm&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;React&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;checkAlarmAddable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;EphemeralStorage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getAlarmListSubject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alarmList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;addable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;alarmList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;purchased&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;NOTE: Please don’t trust the code I have just written above – it is pseudocode that kind of spiralled out of control.&lt;/p&gt;
+
+&lt;p&gt;Also, some more considerations&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Need to make actions more readable (possibly make it more redux-esque)&lt;/li&gt;
+  &lt;li&gt;Not entirely comfortable using rxjs, so I’ll need to go through the documentation again (for the 20th time…)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;When I’m done with this task, hopefully I’ll be able to give some updates whether I still think this was the right decision.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog2/assets/20190130/new_standard.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Problem Statement</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="/blog2/jekyll/update/2019/01/27/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-01-27T13:56:24+00:00</published><updated>2019-01-27T13:56:24+00:00</updated><id>/blog2/jekyll/update/2019/01/27/welcome-to-jekyll</id><content type="html" xml:base="/blog2/jekyll/update/2019/01/27/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 

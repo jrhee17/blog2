@@ -112,7 +112,7 @@ This check is just to notify users before the actual purchase.</li>
 <h1 id="points-to-consider">Points to consider</h1>
 
 <ol>
-  <li>I would like to be able to maintain control over how alarms are added
+  <li>I would like to be able to maintain control over how alarms are added from the server side
     <ul>
       <li>What if I want to change the number of free alarms from <code class="highlighter-rouge">3</code> to <code class="highlighter-rouge">5</code> without app deployment?</li>
     </ul>
@@ -134,6 +134,7 @@ This check is just to notify users before the actual purchase.</li>
       <li>Unfortunately, while using <code class="highlighter-rouge">react-navigation</code> with <code class="highlighter-rouge">react-native</code>, <code class="highlighter-rouge">react-redux</code> isn’t an option.</li>
     </ul>
   </li>
+  <li>Minimize number of server apis if possible</li>
 </ol>
 
 <h1 id="possible-solutions">Possible solutions</h1>
@@ -143,7 +144,42 @@ This check is just to notify users before the actual purchase.</li>
 
 <p><img src="/blog2/assets/20190130/passparams_uml.png" alt="uml" /></p>
 
+<p><em>Description</em></p>
+<ul>
+  <li>Simply call <code class="highlighter-rouge">navigate(routeName, params)</code> with alarm list as params</li>
+</ul>
+
+<p><em>Cons</em></p>
+<ul>
+  <li>Always have to retrieve alarm list before navigating to add alarm screen</li>
+  <li>Domain-wise Add-Alarm screen has little to do with already added alarms</li>
+  <li>Hard to control add-alarm policy</li>
+</ul>
+
+<p><em>Pros</em></p>
+<ul>
+  <li>Simple and straightforward to achieve</li>
+  <li>Efficient - no extra server calls</li>
+</ul>
+
 <p><strong>Rest Call Every Time</strong></p>
+
+<p><em>Description</em></p>
+<ul>
+  <li>Call <code class="highlighter-rouge">[REST] GET alarm/addable</code> every time add alarm screen is loaded</li>
+</ul>
+
+<p><em>Cons</em></p>
+<ul>
+  <li>REST call every time page is loaded</li>
+  <li>Need to create a non-restful api</li>
+</ul>
+
+<p><em>Pros</em></p>
+<ul>
+  <li>Simple and straightforward to achieve</li>
+  <li>Easy to control add-alarm policy</li>
+</ul>
 
 <p><img src="/blog2/assets/20190130/rest_uml.png" alt="uml" /></p>
 
@@ -151,9 +187,102 @@ This check is just to notify users before the actual purchase.</li>
 
 <p><img src="/blog2/assets/20190130/socket_uml.png" alt="uml" /></p>
 
+<p><em>Description</em></p>
+<ul>
+  <li>Send <code class="highlighter-rouge">{'type': 'check.alarm.addable'}</code> every time add alarm screen is loaded</li>
+</ul>
+
+<p><em>Cons</em></p>
+<ul>
+  <li>Minimal efficiency advantage over Rest call (assuming HTTP/2)</li>
+  <li>Hard to develop good UI for asynchronous result</li>
+</ul>
+
+<p><em>Pros</em></p>
+<ul>
+  <li>no real advantage</li>
+</ul>
+
 <p><strong>RXJS cached variant</strong></p>
 
 <p><img src="/blog2/assets/20190130/cached_uml.png" alt="uml" /></p>
+
+<p><em>Description</em></p>
+<ul>
+  <li>Cache api calls using redux pattern and use cached to determine whether alarm is addable</li>
+</ul>
+
+<p><em>Cons</em></p>
+<ul>
+  <li>Challenging to implement</li>
+  <li>Can’t control logic from server</li>
+</ul>
+
+<p><em>Pros</em></p>
+<ul>
+  <li>Efficient - no extra server calls</li>
+  <li>Generic - no extra api calls</li>
+  <li>Client won’t be saving anything.
+Whenever app dies, all data will be reset.</li>
+</ul>
+
+<h1 id="final-verdict">Final Verdict</h1>
+
+<p>I have decided to go with <strong>Redux pattern using RXJS</strong> because I believe it will be worth the hassle.
+In my head, it will go something like this…</p>
+
+<p><em>EphemeralStorage</em></p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">EphemeralStorage</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">alarmListSubject</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rx</span><span class="p">.</span><span class="nx">BehaviorSubject</span><span class="p">([]);</span>
+    <span class="p">}</span>
+    <span class="k">async</span> <span class="nx">updateAlarmList</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">alarmList</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">RestClient</span><span class="p">.</span><span class="nx">getJson</span><span class="p">(</span><span class="s2">`/alarms`</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">alarmListSubject</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="nx">alarmList</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">getAlarmListSubject</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">alarmListSubject</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">export</span> <span class="k">default</span> <span class="k">new</span> <span class="nx">EphemeralStorage</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p><em>AlarmList Screen</em></p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">AlarmList</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    
+    <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">EphemeralStorage</span><span class="p">.</span><span class="nx">getAlarmListSubject</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">alarmList</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="nx">alarmList</span><span class="p">}));</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">fetchAlarmList</span><span class="p">();</span>
+    <span class="p">}</span>
+    
+    <span class="nx">fetchAlarmList</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">EphemeralStorage</span><span class="p">.</span><span class="nx">updateAlarmList</span><span class="p">();</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><em>AddAlarm Screen</em></p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">AddAlarm</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="nx">checkAlarmAddable</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">EphemeralStorage</span><span class="p">.</span><span class="nx">getAlarmListSubject</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">alarmList</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+                <span class="na">addable</span><span class="p">:</span> <span class="nx">alarmList</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="nx">purchased</span><span class="p">,</span>
+            <span class="p">})</span>
+        <span class="p">})</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>NOTE: Please don’t trust the code I have just written above – it is pseudocode that kind of spiralled out of control.</p>
+
+<p>Also, some more considerations</p>
+
+<ol>
+  <li>Need to make actions more readable (possibly make it more redux-esque)</li>
+  <li>Not entirely comfortable using rxjs, so I’ll need to go through the documentation again (for the 20th time…)</li>
+</ol>
+
+<p>When I’m done with this task, hopefully I’ll be able to give some updates whether I still think this was the right decision.</p>
 
 <p><img src="/blog2/assets/20190130/new_standard.jpeg" alt="" /></p>
 
