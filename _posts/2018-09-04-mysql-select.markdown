@@ -2,7 +2,7 @@
 layout: post
 title: 'Mysql Select Flow'
 date: '2018-09-03 15:12:11 -0400'
-categories: second
+categories: mysql
 ---
 
 Mysql
