@@ -47,8 +47,20 @@
   <div class="post-content e-content" itemprop="articleBody">
     <p>Mysql</p>
 
+<p>Objective</p>
+
 <ul>
-  <li>mysql_execute_command
+  <li>Develop a deeper understanding of MySQL internals</li>
+</ul>
+
+<p>Method</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">lldb $MYSQL_ROOT/sql/mysqld -- --defaults-file=$MYSQL_ROOT/my.cnf --debug=t</code></p>
+  </li>
+  <li>
+    <p>mysql_execute_command</p>
     <ul>
       <li>Get table to select from</li>
       <li>Reset connection info</li>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/blog2/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog2/" rel="alternate" type="text/html" /><updated>2019-01-30T15:38:02+00:00</updated><id>/blog2/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Using rxjs as an Ephemeral Storage for Mobile Applications</title><link href="/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html" rel="alternate" type="text/html" title="Using rxjs as an Ephemeral Storage for Mobile Applications" /><published>2019-01-30T11:41:24+00:00</published><updated>2019-01-30T11:41:24+00:00</updated><id>/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage</id><content type="html" xml:base="/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html">&lt;h2 id=&quot;problem-statement&quot;&gt;Problem Statement&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/blog2/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog2/" rel="alternate" type="text/html" /><updated>2019-04-06T08:52:16+00:00</updated><id>/blog2/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Using rxjs as an Ephemeral Storage for Mobile Applications</title><link href="/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html" rel="alternate" type="text/html" title="Using rxjs as an Ephemeral Storage for Mobile Applications" /><published>2019-01-30T11:41:24+00:00</published><updated>2019-01-30T11:41:24+00:00</updated><id>/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage</id><content type="html" xml:base="/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html">&lt;h2 id=&quot;problem-statement&quot;&gt;Problem Statement&lt;/h2&gt;
 
 &lt;h1 id=&quot;purpose&quot;&gt;Purpose&lt;/h1&gt;
 &lt;p&gt;We are developing a Bitcoin Alarm app which simply allows users to&lt;/p&gt;
@@ -251,8 +251,20 @@ In my head, it will go something like this…&lt;/p&gt;
 
 &lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Mysql Select Flow</title><link href="/blog2/mysql/2018/09/03/mysql-select.html" rel="alternate" type="text/html" title="Mysql Select Flow" /><published>2018-09-03T19:12:11+00:00</published><updated>2018-09-03T19:12:11+00:00</updated><id>/blog2/mysql/2018/09/03/mysql-select</id><content type="html" xml:base="/blog2/mysql/2018/09/03/mysql-select.html">&lt;p&gt;Mysql&lt;/p&gt;
 
+&lt;p&gt;Objective&lt;/p&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;mysql_execute_command
+  &lt;li&gt;Develop a deeper understanding of MySQL internals&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Method&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lldb $MYSQL_ROOT/sql/mysqld -- --defaults-file=$MYSQL_ROOT/my.cnf --debug=t&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;mysql_execute_command&lt;/p&gt;
     &lt;ul&gt;
       &lt;li&gt;Get table to select from&lt;/li&gt;
       &lt;li&gt;Reset connection info&lt;/li&gt;
@@ -406,4 +418,750 @@ In my head, it will go something like this…&lt;/p&gt;
       &lt;li&gt;release metadata locks&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Mysql</summary></entry><entry><title type="html">Jelly-filled donuts are my favorite2</title><link href="/blog2/first/2016/05/29/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Jelly-filled donuts are my favorite2" /><published>2016-05-29T19:12:11+00:00</published><updated>2016-05-29T19:12:11+00:00</updated><id>/blog2/first/2016/05/29/welcome-to-jekyll</id><content type="html" xml:base="/blog2/first/2016/05/29/welcome-to-jekyll.html">&lt;p&gt;Jelly-filled donuts are my favorite type of donuts because I like getting them without knowing what’s inside of them. I like to be surprised the moment I bite into them :)&lt;/p&gt;</content><author><name></name></author><summary type="html">Jelly-filled donuts are my favorite type of donuts because I like getting them without knowing what’s inside of them. I like to be surprised the moment I bite into them :)</summary></entry></feed>
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Mysql</summary></entry><entry><title type="html">Mysql Select Flow</title><link href="/blog2/mysql/2018/09/03/start-mysql-connection.html" rel="alternate" type="text/html" title="Mysql Select Flow" /><published>2018-09-03T19:12:11+00:00</published><updated>2018-09-03T19:12:11+00:00</updated><id>/blog2/mysql/2018/09/03/start-mysql-connection</id><content type="html" xml:base="/blog2/mysql/2018/09/03/start-mysql-connection.html">&lt;p&gt;Mysql&lt;/p&gt;
+
+&lt;p&gt;Objective&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Develop a deeper understanding of MySQL internals&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;Per_thread_connection_handler::add_connection
+&amp;lt;Per_thread_connection_handler::add_connection 396
+&amp;gt;mysql_socket_vio_new
+| &amp;gt;my_raw_malloc
+| &amp;lt;my_raw_malloc 219
+| &amp;gt;vio_init
+| &amp;lt;vio_init 175
+&amp;lt;mysql_socket_vio_new 280
+&amp;gt;my_hash_init
+| &amp;gt;init_dynamic_array
+| | &amp;gt;my_raw_malloc
+| | &amp;lt;my_raw_malloc 219
+| &amp;lt;init_dynamic_array 78
+&amp;lt;my_hash_init 120
+&amp;gt;my_hash_init
+| &amp;gt;init_dynamic_array
+| | &amp;gt;my_raw_malloc
+| | &amp;lt;my_raw_malloc 219
+| &amp;lt;init_dynamic_array 78
+&amp;lt;my_hash_init 120
+&amp;gt;Security_context::init
+&amp;lt;Security_context::init 36
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Ha_trx_info::reset
+&amp;lt;Ha_trx_info::reset 94
+&amp;gt;Rpl_transaction_ctx::Rpl_transaction_ctx
+| &amp;gt;Rpl_transaction_ctx::cleanup
+| &amp;lt;Rpl_transaction_ctx::cleanup 40
+&amp;lt;Rpl_transaction_ctx::Rpl_transaction_ctx 28
+&amp;gt;Rpl_transaction_write_set_ctx::Rpl_transaction_write_set_ctx
+&amp;lt;Rpl_transaction_write_set_ctx::Rpl_transaction_write_set_ctx 28
+&amp;gt;init_alloc_root
+| &amp;gt;my_raw_malloc
+| &amp;lt;my_raw_malloc 219
+&amp;lt;init_alloc_root 88
+&amp;gt;init_alloc_root
+&amp;lt;init_alloc_root 88
+&amp;gt;init_alloc_root
+&amp;lt;init_alloc_root 88
+&amp;gt;init_alloc_root
+&amp;lt;init_alloc_root 88
+&amp;gt;init_alloc_root
+&amp;lt;init_alloc_root 88
+&amp;gt;init_alloc_root
+| &amp;gt;my_raw_malloc
+| &amp;lt;my_raw_malloc 219
+&amp;lt;init_alloc_root 88
+&amp;gt;plugin_thdvar_init
+| &amp;gt;plugin_var_memalloc_free
+| &amp;lt;plugin_var_memalloc_free 3407
+| &amp;gt;intern_plugin_lock
+| | &amp;gt;my_raw_malloc
+| | &amp;lt;my_raw_malloc 219
+| &amp;lt;intern_plugin_lock 840
+| &amp;gt;intern_plugin_unlock
+| &amp;lt;intern_plugin_unlock 1101
+| &amp;gt;intern_plugin_lock
+| | &amp;gt;my_raw_malloc
+| | &amp;lt;my_raw_malloc 219
+| &amp;lt;intern_plugin_lock 840
+| &amp;gt;intern_plugin_unlock
+| &amp;lt;intern_plugin_unlock 1101
+| &amp;gt;my_hash_init
+| | &amp;gt;init_dynamic_array
+| | | &amp;gt;my_raw_malloc
+| | | &amp;lt;my_raw_malloc 219
+| | &amp;lt;init_dynamic_array 78
+| &amp;lt;my_hash_init 120
+| &amp;gt;my_raw_malloc
+| &amp;lt;my_raw_malloc 219
+| &amp;gt;my_raw_malloc
+| &amp;lt;my_raw_malloc 219
+| &amp;gt;my_hash_first_from_hash_value
+| &amp;lt;my_hash_first_from_hash_value 331
+&amp;lt;plugin_thdvar_init 3183
+&amp;gt;reset_current_stmt_binlog_format_row
+| &amp;gt;set_current_stmt_binlog_format_row
+| &amp;lt;set_current_stmt_binlog_format_row 3661
+&amp;lt;reset_current_stmt_binlog_format_row 3698
+&amp;gt;debug_sync_init_thread
+&amp;lt;debug_sync_init_thread 653
+&amp;gt;my_hash_init
+| &amp;gt;init_dynamic_array
+| | &amp;gt;my_raw_malloc
+| | &amp;lt;my_raw_malloc 219
+| &amp;lt;init_dynamic_array 78
+&amp;lt;my_hash_init 120
+&amp;gt;my_hash_init
+| &amp;gt;init_dynamic_array
+| | &amp;gt;my_raw_malloc
+| | &amp;lt;my_raw_malloc 219
+| &amp;lt;init_dynamic_array 78
+&amp;lt;my_hash_init 120
+&amp;gt;my_raw_malloc
+&amp;lt;my_raw_malloc 219
+&amp;gt;my_raw_malloc
+&amp;lt;my_raw_malloc 219
+&amp;gt;my_hash_first_from_hash_value
+&amp;lt;my_hash_first_from_hash_value 331
+&amp;gt;my_raw_malloc
+&amp;lt;my_raw_malloc 219
+&amp;gt;my_hash_first_from_hash_value
+&amp;lt;my_hash_first_from_hash_value 331
+&amp;gt;my_raw_malloc
+&amp;lt;my_raw_malloc 219
+&amp;gt;my_hash_first_from_hash_value
+&amp;lt;my_hash_first_from_hash_value 331
+&amp;gt;my_raw_malloc
+&amp;lt;my_raw_malloc 219
+&amp;gt;my_hash_first_from_hash_value
+&amp;lt;my_hash_first_from_hash_value 331
+&amp;gt;my_raw_malloc
+&amp;lt;my_raw_malloc 219
+&amp;gt;my_hash_first_from_hash_value
+&amp;lt;my_hash_first_from_hash_value 331
+&amp;gt;my_raw_malloc
+&amp;lt;my_raw_malloc 219
+&amp;gt;my_free
+&amp;lt;my_free 292
+&amp;gt;my_hash_free
+| &amp;gt;my_free
+| &amp;lt;my_free 292
+&amp;lt;my_hash_free 185
+&amp;gt;my_hash_init
+| &amp;gt;init_dynamic_array
+| | &amp;gt;my_raw_malloc
+| | &amp;lt;my_raw_malloc 219
+| &amp;lt;init_dynamic_array 78
+&amp;lt;my_hash_init 120
+&amp;gt;Gtid::to_string
+&amp;lt;Gtid::to_string 195
+&amp;gt;my_hash_init
+| &amp;gt;init_dynamic_array
+| | &amp;gt;my_raw_malloc
+| | &amp;lt;my_raw_malloc 219
+| &amp;lt;init_dynamic_array 78
+&amp;lt;my_hash_init 120
+&amp;gt;my_raw_malloc
+&amp;lt;my_raw_malloc 219
+&amp;gt;my_net_init
+| &amp;gt;my_net_set_read_timeout
+| | &amp;gt;vio_socket_timeout
+| | | &amp;gt;vio_set_blocking
+| | | &amp;lt;vio_set_blocking 254
+| | &amp;lt;vio_socket_timeout 322
+| &amp;lt;my_net_set_read_timeout 1046
+| &amp;gt;my_net_set_write_timeout
+| | &amp;gt;vio_socket_timeout
+| | &amp;lt;vio_socket_timeout 322
+| &amp;lt;my_net_set_write_timeout 1057
+| &amp;gt;my_raw_malloc
+| &amp;lt;my_raw_malloc 219
+| &amp;gt;vio_fastsend
+| &amp;lt;vio_fastsend 357
+&amp;lt;my_net_init 123
+&amp;gt;Security_context::set_host_ptr
+&amp;lt;Security_context::set_host_ptr 516
+&amp;gt;lex_start
+| &amp;gt;LEX::new_top_level_query
+| | &amp;gt;LEX::new_query
+| | | &amp;gt;alloc_root
+| | | &amp;lt;alloc_root 304
+| | | &amp;gt;alloc_root
+| | | &amp;lt;alloc_root 304
+| | | &amp;gt;alloc_root
+| | | &amp;lt;alloc_root 304
+| | &amp;lt;LEX::new_query 640
+| &amp;lt;LEX::new_top_level_query 746
+&amp;lt;lex_start 511
+&amp;gt;login_connection
+| &amp;gt;my_net_set_read_timeout
+| | &amp;gt;vio_socket_timeout
+| | &amp;lt;vio_socket_timeout 322
+| &amp;lt;my_net_set_read_timeout 1046
+| &amp;gt;my_net_set_write_timeout
+| | &amp;gt;vio_socket_timeout
+| | &amp;lt;vio_socket_timeout 322
+| &amp;lt;my_net_set_write_timeout 1057
+| &amp;gt;Security_context::host
+| &amp;lt;Security_context::host 98
+| &amp;gt;Security_context::host
+| &amp;lt;Security_context::host 98
+| &amp;gt;Security_context::set_host_or_ip_ptr
+| &amp;lt;Security_context::set_host_or_ip_ptr 189
+| &amp;gt;Security_context::set_ip_ptr
+| &amp;lt;Security_context::set_ip_ptr 561
+| &amp;gt;vio_keepalive
+| &amp;lt;vio_keepalive 374
+| &amp;gt;my_raw_malloc
+| &amp;lt;my_raw_malloc 219
+| &amp;gt;mysql_audit_acquire_plugins
+| &amp;lt;mysql_audit_acquire_plugins 1121
+| &amp;gt;acl_authenticate
+| | &amp;gt;Security_context::host_or_ip
+| | &amp;lt;Security_context::host_or_ip 148
+| | &amp;gt;Security_context::ip
+| | &amp;lt;Security_context::ip 123
+| | &amp;gt;Security_context::host
+| | &amp;lt;Security_context::host 98
+| | &amp;gt;do_auth_once
+| | | &amp;gt;native_password_authenticate
+| | | | &amp;gt;server_mpvio_write_packet
+| | | | | &amp;gt;send_server_handshake_packet
+| | | | | | &amp;gt;alloc_root
+| | | | | | &amp;lt;alloc_root 304
+| | | | | | &amp;gt;net_flush
+| | | | | | | &amp;gt;net_write_packet
+| | | | | | | | &amp;gt;Query_cache::insert
+| | | | | | | | &amp;lt;Query_cache::insert 959
+| | | | | | | | &amp;gt;vio_write
+| | | | | | | | &amp;lt;vio_write 214
+| | | | | | | &amp;lt;net_write_packet 648
+| | | | | | &amp;lt;net_flush 228
+| | | | | &amp;lt;send_server_handshake_packet 625
+| | | | &amp;lt;server_mpvio_write_packet 1790
+| | | | &amp;gt;server_mpvio_read_packet
+| | | | | &amp;gt;vio_read
+| | | | | &amp;lt;vio_read 136
+| | | | | &amp;gt;vio_read
+| | | | | &amp;lt;vio_read 136
+| | | | | &amp;gt;alloc_root
+| | | | | &amp;lt;alloc_root 304
+| | | | | &amp;gt;my_raw_malloc
+| | | | | &amp;lt;my_raw_malloc 219
+| | | | &amp;lt;server_mpvio_read_packet 1903
+| | | &amp;lt;native_password_authenticate 2759
+| | &amp;lt;do_auth_once 1971
+| | &amp;gt;Security_context::assign_user
+| | | &amp;gt;my_raw_malloc
+| | | &amp;lt;my_raw_malloc 219
+| | &amp;lt;Security_context::assign_user 493
+| | &amp;gt;my_free
+| | &amp;lt;my_free 292
+| | &amp;gt;Security_context::user
+| | &amp;lt;Security_context::user 73
+| | &amp;gt;shutdown_active_vio
+| | &amp;lt;shutdown_active_vio 2550
+| | &amp;gt;shutdown_active_vio
+| | &amp;lt;shutdown_active_vio 2550
+| | &amp;gt;mysql_audit_acquire_plugins
+| | &amp;lt;mysql_audit_acquire_plugins 1121
+| | &amp;gt;Security_context::assign_proxy_user
+| | &amp;lt;Security_context::assign_proxy_user 701
+| | &amp;gt;Security_context::skip_grants
+| | | &amp;gt;Security_context::set_host_or_ip_ptr
+| | | &amp;lt;Security_context::set_host_or_ip_ptr 189
+| | | &amp;gt;Security_context::assign_priv_user
+| | | &amp;lt;Security_context::assign_priv_user 673
+| | | &amp;gt;Security_context::assign_priv_host
+| | | &amp;lt;Security_context::assign_priv_host 729
+| | &amp;lt;Security_context::skip_grants 79
+| | &amp;gt;set_ok_status
+| | &amp;lt;set_ok_status 396
+| | &amp;gt;Security_context::user
+| | &amp;lt;Security_context::user 73
+| | &amp;gt;Security_context::host_or_ip
+| | &amp;lt;Security_context::host_or_ip 148
+| &amp;lt;acl_authenticate 2566
+| &amp;gt;mysql_audit_acquire_plugins
+| &amp;lt;mysql_audit_acquire_plugins 1121
+| &amp;gt;send_statement_status
+| | &amp;gt;Protocol_classic::send_ok
+| | | &amp;gt;net_send_ok
+| | | | &amp;gt;net_flush
+| | | | | &amp;gt;net_write_packet
+| | | | | | &amp;gt;Query_cache::insert
+| | | | | | &amp;lt;Query_cache::insert 959
+| | | | | | &amp;gt;vio_write
+| | | | | | &amp;lt;vio_write 214
+| | | | | &amp;lt;net_write_packet 648
+| | | | &amp;lt;net_flush 228
+| | | &amp;lt;net_send_ok 374
+| | &amp;lt;Protocol_classic::send_ok 644
+| &amp;lt;send_statement_status 4725
+| &amp;gt;my_net_set_read_timeout
+| | &amp;gt;vio_socket_timeout
+| | &amp;lt;vio_socket_timeout 322
+| &amp;lt;my_net_set_read_timeout 1046
+| &amp;gt;my_net_set_write_timeout
+| | &amp;gt;vio_socket_timeout
+| | &amp;lt;vio_socket_timeout 322
+| &amp;lt;my_net_set_write_timeout 1057
+&amp;lt;login_connection 749
+&amp;gt;Security_context::priv_user
+&amp;lt;Security_context::priv_user 236
+&amp;gt;Security_context::host_or_ip
+&amp;lt;Security_context::host_or_ip 148
+&amp;gt;my_raw_malloc
+&amp;lt;my_raw_malloc 219
+&amp;gt;my_hash_first_from_hash_value
+&amp;lt;my_hash_first_from_hash_value 319
+&amp;gt;plugin_var_memalloc_session_update
+&amp;lt;plugin_var_memalloc_session_update 3385
+&amp;gt;my_hash_first_from_hash_value
+&amp;lt;my_hash_first_from_hash_value 319
+&amp;gt;plugin_var_memalloc_session_update
+&amp;lt;plugin_var_memalloc_session_update 3385
+&amp;gt;ha_enable_transaction
+| &amp;gt;commit_owned_gtids(...)
+| &amp;lt;commit_owned_gtids(...) 1600
+| &amp;gt;ha_commit_trans
+| | &amp;gt;ha_commit_low
+| | &amp;lt;ha_commit_low 1939
+| | &amp;gt;Transaction_ctx::cleanup
+| | | &amp;gt;Rpl_transaction_ctx::cleanup
+| | | &amp;lt;Rpl_transaction_ctx::cleanup 40
+| | | &amp;gt;Transaction_context_log_event::clear_write_set
+| | | &amp;lt;Transaction_context_log_event::clear_write_set 50
+| | | &amp;gt;free_root
+| | | &amp;lt;free_root 477
+| | &amp;lt;Transaction_ctx::cleanup 388
+| &amp;lt;ha_commit_trans 1849
+| &amp;gt;trans_commit_implicit
+| | &amp;gt;ha_commit_low
+| | | &amp;gt;Transaction_ctx::cleanup
+| | | | &amp;gt;Rpl_transaction_ctx::cleanup
+| | | | &amp;lt;Rpl_transaction_ctx::cleanup 40
+| | | | &amp;gt;Transaction_context_log_event::clear_write_set
+| | | | &amp;lt;Transaction_context_log_event::clear_write_set 50
+| | | | &amp;gt;free_root
+| | | | &amp;lt;free_root 477
+| | | &amp;lt;Transaction_ctx::cleanup 388
+| | &amp;lt;ha_commit_low 1939
+| | &amp;gt;Rpl_consistency_ctx::notify_after_transaction_commit
+| | &amp;lt;Rpl_consistency_ctx::notify_after_transaction_commit 64
+| &amp;lt;trans_commit_implicit 332
+&amp;lt;ha_enable_transaction 5016
+&amp;gt;do_command
+| &amp;gt;clear_error
+| &amp;lt;clear_error 3371
+| &amp;gt;reset_diagnostics_area
+| &amp;lt;reset_diagnostics_area 371
+| &amp;gt;my_net_set_read_timeout
+| | &amp;gt;vio_socket_timeout
+| | &amp;lt;vio_socket_timeout 322
+| &amp;lt;my_net_set_read_timeout 1046
+| &amp;gt;vio_read
+| &amp;lt;vio_read 136
+| &amp;gt;PROFILING::status_change
+| &amp;lt;PROFILING::status_change 364
+| &amp;gt;vio_read
+| &amp;lt;vio_read 136
+| &amp;gt;my_raw_malloc
+| &amp;lt;my_raw_malloc 219
+| &amp;gt;my_free
+| &amp;lt;my_free 292
+| &amp;gt;my_net_set_read_timeout
+| | &amp;gt;vio_socket_timeout
+| | &amp;lt;vio_socket_timeout 322
+| &amp;lt;my_net_set_read_timeout 1046
+| &amp;gt;dispatch_command
+| | &amp;gt;PROFILING::start_new_query
+| | &amp;lt;PROFILING::start_new_query 393
+| | &amp;gt;Security_context::priv_user
+| | &amp;lt;Security_context::priv_user 236
+| | &amp;gt;Security_context::host_or_ip
+| | &amp;lt;Security_context::host_or_ip 148
+| | &amp;gt;mysql_audit_acquire_plugins
+| | &amp;lt;mysql_audit_acquire_plugins 1121
+| | &amp;gt;alloc_root
+| | &amp;lt;alloc_root 304
+| | &amp;gt;Security_context::priv_user
+| | &amp;lt;Security_context::priv_user 236
+| | &amp;gt;Security_context::host_or_ip
+| | &amp;lt;Security_context::host_or_ip 148
+| | &amp;gt;PROFILING::set_query_source
+| | &amp;lt;PROFILING::set_query_source 520
+| | &amp;gt;alloc_root
+| | &amp;lt;alloc_root 304
+| | &amp;gt;mysql_parse
+| | | &amp;gt;mysql_reset_thd_for_next_command
+| | | | &amp;gt;clear_error
+| | | | &amp;lt;clear_error 3371
+| | | | &amp;gt;reset_diagnostics_area
+| | | | &amp;lt;reset_diagnostics_area 371
+| | | | &amp;gt;reset_current_stmt_binlog_format_row
+| | | | | &amp;gt;set_current_stmt_binlog_format_row
+| | | | | &amp;lt;set_current_stmt_binlog_format_row 3661
+| | | | &amp;lt;reset_current_stmt_binlog_format_row 3698
+| | | | &amp;gt;THD::set_trans_pos
+| | | | &amp;lt;THD::set_trans_pos 2778
+| | | &amp;lt;mysql_reset_thd_for_next_command 5360
+| | | &amp;gt;lex_start
+| | | | &amp;gt;LEX::new_top_level_query
+| | | | | &amp;gt;LEX::new_query
+| | | | | | &amp;gt;alloc_root
+| | | | | | &amp;lt;alloc_root 304
+| | | | | | &amp;gt;alloc_root
+| | | | | | &amp;lt;alloc_root 304
+| | | | | | &amp;gt;alloc_root
+| | | | | | &amp;lt;alloc_root 304
+| | | | | &amp;lt;LEX::new_query 640
+| | | | &amp;lt;LEX::new_top_level_query 746
+| | | &amp;lt;lex_start 511
+| | | &amp;gt;reset_diagnostics_area
+| | | &amp;lt;reset_diagnostics_area 371
+| | | &amp;gt;free_root
+| | | &amp;lt;free_root 477
+| | | &amp;gt;mysql_audit_acquire_plugins
+| | | &amp;lt;mysql_audit_acquire_plugins 1121
+| | | &amp;gt;Query_cache::send_result_to_client
+| | | &amp;lt;Query_cache::send_result_to_client 1941
+| | | &amp;gt;parse_sql
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;find_sys_var_ex
+| | | | | &amp;gt;my_hash_first_from_hash_value
+| | | | | &amp;lt;my_hash_first_from_hash_value 319
+| | | | &amp;lt;find_sys_var_ex 2800
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;set_stmt_unsafe
+| | | | &amp;lt;set_stmt_unsafe 2147
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;set_stmt_unsafe
+| | | | &amp;lt;set_stmt_unsafe 2147
+| | | &amp;lt;parse_sql 7229
+| | | &amp;gt;reset_diagnostics_area
+| | | &amp;lt;reset_diagnostics_area 371
+| | | &amp;gt;free_root
+| | | &amp;lt;free_root 477
+| | | &amp;gt;mysql_audit_acquire_plugins
+| | | &amp;lt;mysql_audit_acquire_plugins 1121
+| | | &amp;gt;mysql_audit_acquire_plugins
+| | | &amp;lt;mysql_audit_acquire_plugins 1121
+| | | &amp;gt;Security_context::priv_user
+| | | &amp;lt;Security_context::priv_user 236
+| | | &amp;gt;Security_context::host_or_ip
+| | | &amp;lt;Security_context::host_or_ip 148
+| | | &amp;gt;mysql_execute_command
+| | | | &amp;gt;reset_diagnostics_area
+| | | | &amp;lt;reset_diagnostics_area 371
+| | | | &amp;gt;free_root
+| | | | &amp;lt;free_root 477
+| | | | &amp;gt;deny_updates_if_read_only_option
+| | | | | &amp;gt;check_readonly
+| | | | | &amp;lt;check_readonly 496
+| | | | &amp;lt;deny_updates_if_read_only_option 1031
+| | | | &amp;gt;opt_trace_start
+| | | | | &amp;gt;Opt_trace_context::start
+| | | | | &amp;lt;Opt_trace_context::start 983
+| | | | | &amp;gt;opt_trace_disable_if_no_tables_access
+| | | | | &amp;lt;opt_trace_disable_if_no_tables_access 441
+| | | | &amp;lt;opt_trace_start 223
+| | | | &amp;gt;gtid_pre_statement_checks
+| | | | | &amp;gt;stmt_causes_implicit_commit
+| | | | | &amp;lt;stmt_causes_implicit_commit 246
+| | | | &amp;lt;gtid_pre_statement_checks 484
+| | | | &amp;gt;stmt_causes_implicit_commit
+| | | | &amp;lt;stmt_causes_implicit_commit 246
+| | | | &amp;gt;gtid_pre_statement_post_implicit_commit_checks
+| | | | | &amp;gt;THD::is_ddl_gtid_compatible
+| | | | | &amp;lt;THD::is_ddl_gtid_compatible 10909
+| | | | &amp;lt;gtid_pre_statement_post_implicit_commit_checks 597
+| | | | &amp;gt;mysql_audit_acquire_plugins
+| | | | &amp;lt;mysql_audit_acquire_plugins 1121
+| | | | &amp;gt;open_temporary_tables
+| | | | &amp;lt;open_temporary_tables 7128
+| | | | &amp;gt;check_access
+| | | | | &amp;gt;PROFILING::status_change
+| | | | | &amp;lt;PROFILING::status_change 364
+| | | | &amp;lt;check_access 880
+| | | | &amp;gt;open_tables_for_query
+| | | | | &amp;gt;open_tables
+| | | | | | &amp;gt;PROFILING::status_change
+| | | | | | &amp;lt;PROFILING::status_change 364
+| | | | | | &amp;gt;my_hash_free
+| | | | | | &amp;lt;my_hash_free 185
+| | | | | | &amp;gt;my_hash_free
+| | | | | | &amp;lt;my_hash_free 185
+| | | | | &amp;lt;open_tables 5922
+| | | | &amp;lt;open_tables_for_query 6499
+| | | | &amp;gt;alloc_root
+| | | | &amp;lt;alloc_root 304
+| | | | &amp;gt;handle_query
+| | | | | &amp;gt;PROFILING::status_change
+| | | | | &amp;lt;PROFILING::status_change 364
+| | | | | &amp;gt;SELECT_LEX::prepare
+| | | | | | &amp;gt;st_select_lex::setup_tables
+| | | | | | &amp;lt;st_select_lex::setup_tables 804
+| | | | | | &amp;gt;alloc_root
+| | | | | | &amp;lt;alloc_root 304
+| | | | | | &amp;gt;setup_fields
+| | | | | | &amp;lt;setup_fields 8960
+| | | | | | &amp;gt;SELECT_LEX::setup_conds
+| | | | | | &amp;lt;SELECT_LEX::setup_conds 1228
+| | | | | | &amp;gt;flatten_subqueries
+| | | | | | &amp;lt;flatten_subqueries 2557
+| | | | | | &amp;gt;SELECT_LEX::apply_local_transforms
+| | | | | | | &amp;gt;simplify_joins
+| | | | | | | &amp;lt;simplify_joins 1627
+| | | | | | | &amp;gt;record_join_nest_info
+| | | | | | | &amp;lt;record_join_nest_info 1677
+| | | | | | | &amp;gt;build_bitmap_for_nested_joins
+| | | | | | | &amp;lt;build_bitmap_for_nested_joins 4731
+| | | | | | &amp;lt;SELECT_LEX::apply_local_transforms 508
+| | | | | &amp;lt;SELECT_LEX::prepare 394
+| | | | | &amp;gt;lock_tables
+| | | | | | &amp;gt;THD::decide_logging_format
+| | | | | | &amp;lt;THD::decide_logging_format 10796
+| | | | | &amp;lt;lock_tables 6603
+| | | | | &amp;gt;Query_cache::store_query
+| | | | | | &amp;gt;THD::is_classic_protocol
+| | | | | | &amp;lt;THD::is_classic_protocol 3382
+| | | | | | &amp;gt;Query_cache::is_cacheable
+| | | | | | &amp;lt;Query_cache::is_cacheable 3867
+| | | | | &amp;lt;Query_cache::store_query 1469
+| | | | | &amp;gt;SELECT_LEX::optimize
+| | | | | | &amp;gt;alloc_root
+| | | | | | &amp;lt;alloc_root 304
+| | | | | | &amp;gt;JOIN::optimize
+| | | | | | | &amp;gt;PROFILING::status_change
+| | | | | | | &amp;lt;PROFILING::status_change 364
+| | | | | | | &amp;gt;alloc_func_list
+| | | | | | | | &amp;gt;alloc_root
+| | | | | | | | &amp;lt;alloc_root 304
+| | | | | | | &amp;lt;alloc_func_list 3062
+| | | | | | | &amp;gt;JOIN::make_tmp_tables_info
+| | | | | | | &amp;lt;JOIN::make_tmp_tables_info 3917
+| | | | | | &amp;lt;JOIN::optimize 353
+| | | | | &amp;lt;SELECT_LEX::optimize 1019
+| | | | | &amp;gt;JOIN::exec
+| | | | | | &amp;gt;PROFILING::status_change
+| | | | | | &amp;lt;PROFILING::status_change 364
+| | | | | | &amp;gt;JOIN::prepare_result
+| | | | | | &amp;lt;JOIN::prepare_result 912
+| | | | | | &amp;gt;send_result_metadata
+| | | | | | | &amp;gt;Protocol_classic::start_result_metadata
+| | | | | | | | &amp;gt;alloc_root
+| | | | | | | | &amp;lt;alloc_root 304
+| | | | | | | &amp;lt;Protocol_classic::start_result_metadata 1058
+| | | | | | | &amp;gt;Protocol_classic::send_field_metadata
+| | | | | | | &amp;lt;Protocol_classic::send_field_metadata 1189
+| | | | | | | &amp;gt;Protocol_classic::end_row
+| | | | | | | &amp;lt;Protocol_classic::end_row 1198
+| | | | | | &amp;lt;send_result_metadata 4660
+| | | | | | &amp;gt;Protocol_classic::end_result_metadata
+| | | | | | &amp;lt;Protocol_classic::end_result_metadata 1085
+| | | | | | &amp;gt;Query_result_send::send_data
+| | | | | | | &amp;gt;send_result_set_row
+| | | | | | | | &amp;gt;my_raw_malloc
+| | | | | | | | &amp;lt;my_raw_malloc 219
+| | | | | | | &amp;lt;send_result_set_row 4685
+| | | | | | &amp;lt;Query_result_send::send_data 2724
+| | | | | | &amp;gt;Protocol_classic::end_row
+| | | | | | &amp;lt;Protocol_classic::end_row 1198
+| | | | | | &amp;gt;set_eof_status
+| | | | | | &amp;lt;set_eof_status 422
+| | | | | &amp;lt;JOIN::exec 172
+| | | | | &amp;gt;PROFILING::status_change
+| | | | | &amp;lt;PROFILING::status_change 364
+| | | | | &amp;gt;st_select_lex_unit::cleanup
+| | | | | | &amp;gt;st_select_lex::cleanup()
+| | | | | | | &amp;gt;JOIN::cleanup
+| | | | | | | &amp;lt;JOIN::cleanup 2634
+| | | | | | &amp;lt;st_select_lex::cleanup() 1092
+| | | | | &amp;lt;st_select_lex_unit::cleanup 944
+| | | | &amp;lt;handle_query 204
+| | | | &amp;gt;PROFILING::status_change
+| | | | &amp;lt;PROFILING::status_change 364
+| | | | &amp;gt;mysql_audit_acquire_plugins
+| | | | &amp;lt;mysql_audit_acquire_plugins 1121
+| | | | &amp;gt;trans_commit_stmt
+| | | | | &amp;gt;ha_commit_low
+| | | | | &amp;lt;ha_commit_low 1939
+| | | | | &amp;gt;Rpl_consistency_ctx::notify_after_transaction_commit
+| | | | | &amp;lt;Rpl_consistency_ctx::notify_after_transaction_commit 64
+| | | | &amp;lt;trans_commit_stmt 474
+| | | | &amp;gt;st_select_lex_unit::cleanup
+| | | | | &amp;gt;st_select_lex::cleanup()
+| | | | | | &amp;gt;JOIN::destroy
+| | | | | | &amp;lt;JOIN::destroy 975
+| | | | | &amp;lt;st_select_lex::cleanup() 1092
+| | | | &amp;lt;st_select_lex_unit::cleanup 944
+| | | | &amp;gt;PROFILING::status_change
+| | | | &amp;lt;PROFILING::status_change 364
+| | | | &amp;gt;close_thread_tables
+| | | | &amp;lt;close_thread_tables 1724
+| | | | &amp;gt;stmt_causes_implicit_commit
+| | | | &amp;lt;stmt_causes_implicit_commit 246
+| | | | &amp;gt;MDL_context::release_transactional_locks
+| | | | | &amp;gt;MDL_context::release_locks_stored_before
+| | | | | &amp;lt;MDL_context::release_locks_stored_before 4439
+| | | | | &amp;gt;MDL_context::release_locks_stored_before
+| | | | | &amp;lt;MDL_context::release_locks_stored_before 4439
+| | | | &amp;lt;MDL_context::release_transactional_locks 4718
+| | | | &amp;gt;binlog_gtid_end_transaction
+| | | | | &amp;gt;stmt_causes_implicit_commit
+| | | | | &amp;lt;stmt_causes_implicit_commit 246
+| | | | &amp;lt;binlog_gtid_end_transaction 2394
+| | | &amp;lt;mysql_execute_command 5106
+| | | &amp;gt;~opt_trace_start
+| | | &amp;lt;~opt_trace_start 232
+| | | &amp;gt;PROFILING::status_change
+| | | &amp;lt;PROFILING::status_change 364
+| | | &amp;gt;lex_end
+| | | &amp;lt;lex_end 534
+| | | &amp;gt;Query_arena::free_items
+| | | | &amp;gt;Item_result_field::cleanup()
+| | | | | &amp;gt;Item::cleanup
+| | | | | &amp;lt;Item::cleanup 797
+| | | | &amp;lt;Item_result_field::cleanup() 10808
+| | | | &amp;gt;my_free
+| | | | &amp;lt;my_free 292
+| | | | &amp;gt;Item::cleanup
+| | | | &amp;lt;Item::cleanup 797
+| | | | &amp;gt;Item::cleanup
+| | | | &amp;lt;Item::cleanup 797
+| | | &amp;lt;Query_arena::free_items 3395
+| | &amp;lt;mysql_parse 5647
+| | &amp;gt;send_statement_status
+| | | &amp;gt;Protocol_classic::send_eof
+| | | | &amp;gt;net_send_ok
+| | | | | &amp;gt;net_flush
+| | | | | | &amp;gt;net_write_packet
+| | | | | | | &amp;gt;Query_cache::insert
+| | | | | | | &amp;lt;Query_cache::insert 959
+| | | | | | | &amp;gt;vio_write
+| | | | | | | &amp;lt;vio_write 214
+| | | | | | &amp;lt;net_write_packet 648
+| | | | | &amp;lt;net_flush 228
+| | | | &amp;lt;net_send_ok 374
+| | | &amp;lt;Protocol_classic::send_eof 672
+| | &amp;lt;send_statement_status 4725
+| | &amp;gt;Rpl_consistency_ctx::notify_after_response_packet
+| | &amp;lt;Rpl_consistency_ctx::notify_after_response_packet 147
+| | &amp;gt;Query_cache::end_of_result
+| | &amp;lt;Query_cache::end_of_result 1056
+| | &amp;gt;mysql_audit_acquire_plugins
+| | &amp;lt;mysql_audit_acquire_plugins 1121
+| | &amp;gt;mysql_audit_acquire_plugins
+| | &amp;lt;mysql_audit_acquire_plugins 1121
+| | &amp;gt;mysql_audit_acquire_plugins
+| | &amp;lt;mysql_audit_acquire_plugins 1121
+| | &amp;gt;log_slow_applicable
+| | &amp;lt;log_slow_applicable 1707
+| | &amp;gt;PROFILING::status_change
+| | &amp;lt;PROFILING::status_change 364
+| | &amp;gt;free_root
+| | &amp;lt;free_root 477
+| | &amp;gt;PROFILING::finish_current_profile
+| | &amp;lt;PROFILING::finish_current_profile 450
+| &amp;lt;dispatch_command 1928
+&amp;lt;do_command 1007
+&amp;gt;do_command
+| &amp;gt;clear_error
+| &amp;lt;clear_error 3371
+| &amp;gt;reset_diagnostics_area
+| &amp;lt;reset_diagnostics_area 371
+| &amp;gt;my_net_set_read_timeout
+| | &amp;gt;vio_socket_timeout
+| | &amp;lt;vio_socket_timeout 322
+| &amp;lt;my_net_set_read_timeout 1046
+| &amp;gt;vio_read
+| | &amp;gt;vio_io_wait
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">Mysql</summary></entry><entry><title type="html">Jelly-filled donuts are my favorite2</title><link href="/blog2/first/2016/05/29/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Jelly-filled donuts are my favorite2" /><published>2016-05-29T19:12:11+00:00</published><updated>2016-05-29T19:12:11+00:00</updated><id>/blog2/first/2016/05/29/welcome-to-jekyll</id><content type="html" xml:base="/blog2/first/2016/05/29/welcome-to-jekyll.html">&lt;p&gt;Jelly-filled donuts are my favorite type of donuts because I like getting them without knowing what’s inside of them. I like to be surprised the moment I bite into them :)&lt;/p&gt;</content><author><name></name></author><summary type="html">Jelly-filled donuts are my favorite type of donuts because I like getting them without knowing what’s inside of them. I like to be surprised the moment I bite into them :)</summary></entry></feed>
