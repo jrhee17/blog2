@@ -7,6 +7,15 @@ categories: mysql
 
 Mysql
 
+Objective
+
+- Develop a deeper understanding of MySQL internals
+
+Method
+
+- `lldb $MYSQL_ROOT/sql/mysqld -- --defaults-file=$MYSQL_ROOT/my.cnf --debug=t`
+
+
 - mysql_execute_command
     - Get table to select from
     - Reset connection info
