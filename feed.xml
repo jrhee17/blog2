@@ -1,4 +1,68 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/blog2/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog2/" rel="alternate" type="text/html" /><updated>2019-06-24T16:57:45+00:00</updated><id>/blog2/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Using rxjs as an Ephemeral Storage for Mobile Applications</title><link href="/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html" rel="alternate" type="text/html" title="Using rxjs as an Ephemeral Storage for Mobile Applications" /><published>2019-01-30T11:41:24+00:00</published><updated>2019-01-30T11:41:24+00:00</updated><id>/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage</id><content type="html" xml:base="/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html">&lt;h2 id=&quot;problem-statement&quot;&gt;Problem Statement&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/blog2/feed.xml" rel="self" type="application/atom+xml" /><link href="/blog2/" rel="alternate" type="text/html" /><updated>2019-07-14T09:02:46+00:00</updated><id>/blog2/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Cassandra create table analysis</title><link href="/blog2/cassandra/2019/07/14/cassandra-create-table-analysis.html" rel="alternate" type="text/html" title="Cassandra create table analysis" /><published>2019-07-14T00:00:00+00:00</published><updated>2019-07-14T00:00:00+00:00</updated><id>/blog2/cassandra/2019/07/14/cassandra-create-table-analysis</id><content type="html" xml:base="/blog2/cassandra/2019/07/14/cassandra-create-table-analysis.html">&lt;h3 id=&quot;notes-for-create-table-statements&quot;&gt;Notes for create table statements&lt;/h3&gt;
+
+&lt;p&gt;Query used&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;CREATE TABLE %s (p text, c text, v text, s text static, PRIMARY KEY (p, c))&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;System table definitions can be found in the &lt;code class=&quot;highlighter-rouge&quot;&gt;SchemaKeyspaces&lt;/code&gt; class.
+These tables are used internally for any schema change&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;https://github.com/apache/cassandra/blob/149caf01e08f58f306ff51379ab189c7a4b1ca6d/src/java/org/apache/cassandra/schema/SchemaKeyspace.java#L108&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Every change to schema calls the following method:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Schema.transform(SchemaTransformation transformation, boolean locally, long now)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This method essentially does the following:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Get the current &lt;code class=&quot;highlighter-rouge&quot;&gt;Keyspaces&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Apply a transformation and get the expected &lt;code class=&quot;highlighter-rouge&quot;&gt;Keyspaces&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Get &lt;code class=&quot;highlighter-rouge&quot;&gt;KeyspacesDiff&lt;/code&gt; between current and expected &lt;code class=&quot;highlighter-rouge&quot;&gt;Keyspaces&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Convert the &lt;code class=&quot;highlighter-rouge&quot;&gt;KeyspacesDiff&lt;/code&gt; to a generic &lt;code class=&quot;highlighter-rouge&quot;&gt;Collection&amp;lt;Mutation&amp;gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Apply each &lt;code class=&quot;highlighter-rouge&quot;&gt;Mutation&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;apply &lt;code class=&quot;highlighter-rouge&quot;&gt;PartitionUpdate&lt;/code&gt; to commit log 
+ &lt;code class=&quot;highlighter-rouge&quot;&gt;getWriteHandler().beginWrite(mutation, makeDurable)&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;apply &lt;code class=&quot;highlighter-rouge&quot;&gt;PartitionUpdate&lt;/code&gt; to memtable
+ &lt;code class=&quot;highlighter-rouge&quot;&gt;cfs.getWriteHandler().write(upd, ctx, indexTransaction)&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Update version and announce&lt;/li&gt;
+  &lt;li&gt;Broadcast change to other nodes&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;mutation-applied&quot;&gt;Mutation applied&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[Mutation(keyspace='system_schema', key='63716c5f746573745f6b65797370616365', modifications=[
+  [system_schema.columns] key=cql_test_keyspace partition_deletion=deletedAt=-9223372036854775808, localDeletion=2147483647 columns=[[] | [clustering_order column_name_bytes kind position type]]
+    Row[info=[ts=1563086421518000] ]: table_name=table_0, column_name=c | [clustering_order=asc ts=1563086421518000], [column_name_bytes=63 ts=1563086421518000], [kind=clustering ts=1563086421518000], [position=0 ts=1563086421518000], [type=text ts=1563086421518000]
+    Row[info=[ts=1563086421518000] ]: table_name=table_0, column_name=p | [clustering_order=none ts=1563086421518000], [column_name_bytes=70 ts=1563086421518000], [kind=partition_key ts=1563086421518000], [position=0 ts=1563086421518000], [type=text ts=1563086421518000]
+    Row[info=[ts=1563086421518000] ]: table_name=table_0, column_name=s | [clustering_order=none ts=1563086421518000], [column_name_bytes=73 ts=1563086421518000], [kind=static ts=1563086421518000], [position=-1 ts=1563086421518000], [type=text ts=1563086421518000]
+    Row[info=[ts=1563086421518000] ]: table_name=table_0, column_name=v | [clustering_order=none ts=1563086421518000], [column_name_bytes=76 ts=1563086421518000], [kind=regular ts=1563086421518000], [position=-1 ts=1563086421518000], [type=text ts=1563086421518000]
+
+  [system_schema.keyspaces] key=cql_test_keyspace partition_deletion=deletedAt=-9223372036854775808, localDeletion=2147483647 columns=[[] | [durable_writes replication]]
+    Row[info=[ts=1563086421518000] ]: EMPTY | [durable_writes=true ts=1563086421518000], [replication=0000000200000005636c6173730000002b6f72672e6170616368652e63617373616e6472612e6c6f6361746f722e53696d706c655374726174656779000000127265706c69636174696f6e5f666163746f720000000131 ts=1563086421518000]
+
+  [system_schema.tables] key=cql_test_keyspace partition_deletion=deletedAt=-9223372036854775808, localDeletion=2147483647 columns=[[] | [additional_write_policy bloom_filter_fp_chance caching comment compaction compression crc_check_chance dclocal_read_repair_chance default_time_to_live extensions flags gc_grace_seconds id max_index_interval memtable_flush_period_in_ms min_index_interval read_repair read_repair_chance speculative_retry]]
+    Row[info=[ts=1563086421518000] ]: table_name=table_0 | [additional_write_policy=99p ts=1563086421518000], [bloom_filter_fp_chance=0.01 ts=1563086421518000], [caching=00000002000000046b65797300000003414c4c00000012726f77735f7065725f706172746974696f6e000000044e4f4e45 ts=1563086421518000], [comment= ts=1563086421518000], [compaction=0000000300000005636c6173730000003f6f72672e6170616368652e63617373616e6472612e64622e636f6d70616374696f6e2e53697a65546965726564436f6d70616374696f6e53747261746567790000000d6d61785f7468726573686f6c640000000233320000000d6d696e5f7468726573686f6c640000000134 ts=1563086421518000], [compression=00000002000000126368756e6b5f6c656e6774685f696e5f6b6200000002313600000005636c6173730000002e6f72672e6170616368652e63617373616e6472612e696f2e636f6d70726573732e4c5a34436f6d70726573736f72 ts=1563086421518000], [crc_check_chance=1.0 ts=1563086421518000], [dclocal_read_repair_chance=0.0 ts=1563086421518000], [default_time_to_live=0 ts=1563086421518000], [extensions=00000000 ts=1563086421518000], [flags=0000000100000008636f6d706f756e64 ts=1563086421518000], [gc_grace_seconds=864000 ts=1563086421518000], [id=409569f0-a602-11e9-a19b-33a69b4152ed ts=1563086421518000], [max_index_interval=2048 ts=1563086421518000], [memtable_flush_period_in_ms=0 ts=1563086421518000], [min_index_interval=128 ts=1563086421518000], [read_repair=BLOCKING ts=1563086421518000], [read_repair_chance=0.0 ts=1563086421518000], [speculative_retry=99p ts=1563086421518000]
+])]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">Notes for create table statements</summary></entry><entry><title type="html">Armeria Server Analysis</title><link href="/blog2/armeria/2019/06/25/armeria-server-analysis.html" rel="alternate" type="text/html" title="Armeria Server Analysis" /><published>2019-06-25T00:00:00+00:00</published><updated>2019-06-25T00:00:00+00:00</updated><id>/blog2/armeria/2019/06/25/armeria-server-analysis</id><content type="html" xml:base="/blog2/armeria/2019/06/25/armeria-server-analysis.html">&lt;p&gt;ServerBuilder: Create a &lt;code class=&quot;highlighter-rouge&quot;&gt;ServerConfig&lt;/code&gt; which contains various server related configurations,
+ and a &lt;code class=&quot;highlighter-rouge&quot;&gt;VirtualHost&lt;/code&gt; which contains a list of &lt;code class=&quot;highlighter-rouge&quot;&gt;ServiceConfig&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;AnnotatedHttpServiceFactory: Converts &lt;code class=&quot;highlighter-rouge&quot;&gt;Method&lt;/code&gt; objects to &lt;code class=&quot;highlighter-rouge&quot;&gt;AnnotatedHttpServiceElement&lt;/code&gt; objects.&lt;/p&gt;
+
+&lt;p&gt;VirtualHostBuilder&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Contains a list of &lt;code class=&quot;highlighter-rouge&quot;&gt;ServiceConfigBuilder&lt;/code&gt;, each of which contains a &lt;code class=&quot;highlighter-rouge&quot;&gt;service&lt;/code&gt; and a &lt;code class=&quot;highlighter-rouge&quot;&gt;route&lt;/code&gt;.
+Each of these &lt;code class=&quot;highlighter-rouge&quot;&gt;ServiceConfigBuilder&lt;/code&gt; later is set additional values such as &lt;code class=&quot;highlighter-rouge&quot;&gt;requestTimeoutMillis&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;maxRequestLength&lt;/code&gt;, etc. and
+is built to a &lt;code class=&quot;highlighter-rouge&quot;&gt;ServiceConfig&lt;/code&gt; when the enclosing &lt;code class=&quot;highlighter-rouge&quot;&gt;VirtualHostBuilder&lt;/code&gt; is built.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;VirtualHostBuilder.build()&lt;/code&gt; is invoked when &lt;code class=&quot;highlighter-rouge&quot;&gt;ServerBuilder.build()&lt;/code&gt; is invoked&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">ServerBuilder: Create a ServerConfig which contains various server related configurations, and a VirtualHost which contains a list of ServiceConfig.</summary></entry><entry><title type="html">Using rxjs as an Ephemeral Storage for Mobile Applications</title><link href="/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html" rel="alternate" type="text/html" title="Using rxjs as an Ephemeral Storage for Mobile Applications" /><published>2019-01-30T11:41:24+00:00</published><updated>2019-01-30T11:41:24+00:00</updated><id>/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage</id><content type="html" xml:base="/blog2/devnotes/2019/01/30/using-rxjs-as-an-ephemeral-storage.html">&lt;h2 id=&quot;problem-statement&quot;&gt;Problem Statement&lt;/h2&gt;
 
 &lt;h1 id=&quot;purpose&quot;&gt;Purpose&lt;/h1&gt;
 &lt;p&gt;We are developing a Bitcoin Alarm app which simply allows users to&lt;/p&gt;
